@@ -10,10 +10,13 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.response.respond
 import io.ktor.routing.*
 import org.koin.ktor.ext.inject
+import org.litote.kmongo.addToSet
 import org.litote.kmongo.coroutine.CoroutineClient
 import org.litote.kmongo.eq
+import org.litote.kmongo.set
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import java.util.*
 
 fun Route.userRoutes() {
 
@@ -35,6 +38,7 @@ fun Route.userRoutes() {
 
         post<UpdateRequest>("/update"){ request ->
             val user = User(
+                id = UUID.fromString(request.id),
                 username = request.username,
                 email = request.email,
                 passwordHash = request.password//TODO /!\ hash password !! /!\

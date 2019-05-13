@@ -4,7 +4,8 @@ data class RegisterRequest(val username: String,
                            val email : String,
                            val password: String)
 
-data class UpdateRequest(val username: String,
+data class UpdateRequest(val id: String,
+                           val username: String,
                            val email : String,
                            val password: String)
 
