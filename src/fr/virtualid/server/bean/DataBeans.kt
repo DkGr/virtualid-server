@@ -8,5 +8,7 @@ data class User(
     @BsonId val id: UUID = UUID.randomUUID(),
     val username: String,
     val passwordHash: String,
-    val email: String = ""
+    val email: String = "",
+    val publicKey: String = "",
+    val privateKey: String = ""
 )

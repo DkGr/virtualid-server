@@ -56,7 +56,9 @@ fun Route.userRoutes() {
             val user = User(
                 username = request.username,
                 email = request.email,
-                passwordHash = request.password//TODO /!\ hash password !! /!\
+                passwordHash = request.password,//TODO /!\ hash password !! /!\
+                publicKey = request.publicKey,
+                privateKey = request.privateKey
             )
             client.getDatabase(dbName)
                 .getCollection<User>(collectionName)
