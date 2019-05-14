@@ -9,6 +9,7 @@ import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
 import io.ktor.response.respond
 import io.ktor.routing.*
+import io.ktor.util.getDigestFunction
 import org.koin.ktor.ext.inject
 import org.litote.kmongo.addToSet
 import org.litote.kmongo.coroutine.CoroutineClient
@@ -17,12 +18,16 @@ import org.litote.kmongo.set
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.util.*
+import com.oracle.util.Checksums.update
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
+import kotlin.experimental.and
+
 
 fun Route.userRoutes() {
 
     val logger: Logger = LoggerFactory.getLogger("UserController")
     val client: CoroutineClient by inject()
-
 
     val collectionName = "users"
 
@@ -41,7 +46,7 @@ fun Route.userRoutes() {
                 id = UUID.fromString(request.id),
                 username = request.username,
                 email = request.email,
-                passwordHash = request.password//TODO /!\ hash password !! /!\
+                passwordHash = getHashCodeFromString("SHA-512", request.password)
             )
 
             client.getDatabase(dbName)
@@ -56,7 +61,7 @@ fun Route.userRoutes() {
             val user = User(
                 username = request.username,
                 email = request.email,
-                passwordHash = request.password,//TODO /!\ hash password !! /!\
+                passwordHash = getHashCodeFromString("SHA-512", request.password),
                 publicKey = request.publicKey,
                 privateKey = request.privateKey
             )
@@ -77,6 +82,20 @@ fun Route.userRoutes() {
             call.respond(HttpStatusCode.OK)
         }
     }
+}
+
+@Throws(NoSuchAlgorithmException::class)
+private fun getHashCodeFromString(algorithm: String, str: String): String {
+    val md = MessageDigest.getInstance(algorithm)
+    md.update(str.toByteArray())
+    val byteData = md.digest()
+
+    //convert the byte to hex format method 1
+    val hashCodeBuffer = StringBuffer()
+    for (i in byteData.indices) {
+        hashCodeBuffer.append(Integer.toString((byteData[i] and 0xff.toByte()) + 0x100, 16).substring(1))
+    }
+    return hashCodeBuffer.toString()
 }
 
 

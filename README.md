@@ -3,11 +3,11 @@
 Virtual iD is a project prototype to create an open-source and encrypted social network with no personal data violations. Uploaded files (photos, videos,...) are stored into a private ownCloud space syncable with your computers, tablets and smartphones. Encryption/decryption features are powered by [OpenPGP.js](https://github.com/openpgpjs/openpgpjs). File storage and sync are powered by [NextCloud](https://nextcloud.com/).
 
 ## Working features
-- Nothing
+
+- Basic account Creation
 
 ## TODO
-- Basic account Creation
-- Account creation with Facebook link
+
 - Public stream post creation
 - Photo/Video link embeded into posts
 - OpenPGP keys generation at account creation
@@ -19,7 +19,7 @@ Virtual iD is a project prototype to create an open-source and encrypted social 
 - Instant Messaging
 - Stream posts visibility system
 - OpenPGP encryption/Decryption for posts
-- Photo/Video upload into ownCloud server
+- Photo/Video upload into NextCloud server
 - Account information page
 - Privacy settings
 - Encryption settings
