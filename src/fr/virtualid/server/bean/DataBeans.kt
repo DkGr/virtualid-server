@@ -1,5 +1,6 @@
 package fr.virtualid.server.bean
 
+import io.ktor.auth.Principal
 import org.bson.codecs.pojo.annotations.BsonId
 import java.util.*
 
@@ -11,4 +12,4 @@ data class User(
     val email: String = "",
     val publicKey: String = "",
     val privateKey: String = ""
-)
+) : Principal

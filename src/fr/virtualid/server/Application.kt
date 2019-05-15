@@ -2,17 +2,32 @@ package fr.virtualid.server
 
 import fr.virtualid.server.controller.userRoutes
 import com.fasterxml.jackson.databind.SerializationFeature
+import fr.virtualid.server.bean.User
+import fr.virtualid.server.dal.Users
 import io.ktor.application.Application
+import io.ktor.application.call
 import io.ktor.application.install
+import io.ktor.auth.*
+import io.ktor.auth.jwt.jwt
 import io.ktor.features.*
+import io.ktor.http.ContentType
 import io.ktor.http.HttpMethod
+import io.ktor.http.HttpStatusCode
 import io.ktor.jackson.jackson
 import io.ktor.locations.Locations
 import io.ktor.request.path
+import io.ktor.request.receive
+import io.ktor.response.respond
+import io.ktor.response.respondText
+import io.ktor.routing.post
 import io.ktor.routing.routing
+import me.avo.io.ktor.auth.jwt.sample.JwtConfig
 import org.koin.dsl.module
+import org.koin.ktor.ext.inject
 import org.koin.ktor.ext.installKoin
+import org.litote.kmongo.coroutine.CoroutineClient
 import org.litote.kmongo.coroutine.coroutine
+import org.litote.kmongo.eq
 import org.litote.kmongo.reactivestreams.KMongo
 import org.slf4j.event.Level
 
@@ -60,7 +75,39 @@ fun Application.module(testing: Boolean = false) {
         modules(module)
     }
 
+    install(Authentication) {
+        /**
+         * Setup the JWT authentication to be used in [Routing].
+         * If the token is valid, the corresponding [User] is fetched from the database.
+         * The [User] can then be accessed in each [ApplicationCall].
+         */
+        jwt(name = "virtualid-user-auth") {
+            verifier(JwtConfig.verifier)
+            realm = "Virtual iD API"
+            validate {
+                val client : CoroutineClient by inject()
+                val id = it.payload.getClaim("id").asString()
+                Users.findUserById(id, client)
+            }
+        }
+    }
+
     routing {
+
+        /**
+         * A public login [Route] used to obtain JWTs
+         */
+        post("login") {
+            val client : CoroutineClient by this@routing.inject()
+            val credentials = call.receive<UserPasswordCredential>()
+            val user = UserAuth.authenticate(credentials, client)
+            if(user == null) call.respond(HttpStatusCode.Forbidden)
+            else {
+                val token = JwtConfig.makeToken(user)
+                call.respondText("{\"token\":\"${token}\"}", ContentType.Application.Json)
+            }
+        }
+
         userRoutes()
     }
 }
