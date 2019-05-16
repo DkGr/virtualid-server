@@ -7,10 +7,15 @@ import fr.virtualid.server.request.DeleteRequest
 import fr.virtualid.server.request.RegisterRequest
 import fr.virtualid.server.request.UpdateRequest
 import io.ktor.application.call
+import io.ktor.auth.UserPasswordCredential
 import io.ktor.auth.authenticate
+import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
+import io.ktor.request.receive
 import io.ktor.response.respond
+import io.ktor.response.respondText
 import io.ktor.routing.*
+import me.avo.io.ktor.auth.jwt.sample.JwtConfig
 import org.koin.ktor.ext.inject
 import org.litote.kmongo.coroutine.CoroutineClient
 import org.litote.kmongo.eq
@@ -59,6 +64,20 @@ fun Route.userRoutes() {
 
                 logger.info("User ${request.username} deleted")
                 call.respond(HttpStatusCode.OK)
+            }
+        }
+
+        /**
+         * A public login [Route] used to obtain JWTs
+         */
+        post("login") {
+            val client : CoroutineClient by this@route.inject()
+            val credentials = call.receive<UserPasswordCredential>()
+            val user = UserAuth.authenticate(credentials, client)
+            if(user == null) call.respond(HttpStatusCode.Forbidden)
+            else {
+                val token = JwtConfig.makeToken(user)
+                call.respondText("{\"token\":\"${token}\"}", ContentType.Application.Json)
             }
         }
 

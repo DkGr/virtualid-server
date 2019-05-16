@@ -93,21 +93,6 @@ fun Application.module(testing: Boolean = false) {
     }
 
     routing {
-
-        /**
-         * A public login [Route] used to obtain JWTs
-         */
-        post("login") {
-            val client : CoroutineClient by this@routing.inject()
-            val credentials = call.receive<UserPasswordCredential>()
-            val user = UserAuth.authenticate(credentials, client)
-            if(user == null) call.respond(HttpStatusCode.Forbidden)
-            else {
-                val token = JwtConfig.makeToken(user)
-                call.respondText("{\"token\":\"${token}\"}", ContentType.Application.Json)
-            }
-        }
-
         userRoutes()
     }
 }
