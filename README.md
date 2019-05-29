@@ -5,6 +5,7 @@ Virtual iD is a project prototype to create an open-source and encrypted social 
 ## Working features
 
 - Basic account Creation
+- JWT Token authentication
 - OpenPGP keys generation at account creation
 - Public stream post creation
 
@@ -33,3 +34,27 @@ Virtual iD is a project prototype to create an open-source and encrypted social 
 - Geolocation sharing
 - Virtual Community pages
 - Free and Premium account system (More cloud storage for premium)
+
+## Installation on Ubuntu 18.04
+
+Follow [Offical mongodb instructions](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/) to install mongodb server
+
+
+Next, start mongodb server :
+
+```sudo service mongod start```
+
+Install Java 11 :
+
+```apt install openjdk-11-jdk-headless```
+
+Download the latest release :
+
+```wget https://github.com/eline-technologies/virtualid-server/releases/download/0.1.0-alpha/virtualid-server-0.1.0.jar```
+
+Now you can run the Virtual iD server :
+
+```java -jar virtualid-server-0.1.0.jar```
+
+
+
