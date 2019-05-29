@@ -5,12 +5,12 @@ Virtual iD is a project prototype to create an open-source and encrypted social 
 ## Working features
 
 - Basic account Creation
+- OpenPGP keys generation at account creation
+- Public stream post creation
 
 ## TODO
 
-- Public stream post creation
 - Photo/Video link embeded into posts
-- OpenPGP keys generation at account creation
 - User search
 - Comment system
 - Like system

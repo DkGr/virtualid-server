@@ -3,9 +3,7 @@ package fr.virtualid.server.controller
 import fr.virtualid.server.UserAuth
 import fr.virtualid.server.bean.User
 import fr.virtualid.server.dbName
-import fr.virtualid.server.request.DeleteRequest
-import fr.virtualid.server.request.RegisterRequest
-import fr.virtualid.server.request.UpdateRequest
+import fr.virtualid.server.request.*
 import io.ktor.application.call
 import io.ktor.auth.UserPasswordCredential
 import io.ktor.auth.authenticate
@@ -41,7 +39,7 @@ fun Route.userRoutes() {
                 call.respond(HttpStatusCode.OK, users)
             }
 
-            post<UpdateRequest>("/update") { request ->
+            post<UpdateUserRequest>("/update") { request ->
                 val user = User(
                     id = UUID.fromString(request.id),
                     username = request.username,
@@ -57,7 +55,7 @@ fun Route.userRoutes() {
                 call.respond(HttpStatusCode.OK)
             }
 
-            post<DeleteRequest>("/delete") { request ->
+            post<DeleteUserRequest>("/delete") { request ->
                 client.getDatabase(dbName)
                     .getCollection<User>(collectionName)
                     .deleteOne(User::username eq request.username)
@@ -81,7 +79,7 @@ fun Route.userRoutes() {
             }
         }
 
-        post<RegisterRequest>("/register") { request ->
+        post<RegisterUserRequest>("/register") { request ->
             val user = User(
                 username = request.username,
                 email = request.email,
