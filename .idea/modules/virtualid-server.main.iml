@@ -30,9 +30,6 @@
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output url="file://$MODULE_DIR$/../../out/production/classes" />
     <exclude-output />
-    <content url="file://$MODULE_DIR$/../../resources">
-      <sourceFolder url="file://$MODULE_DIR$/../../resources" type="java-resource" />
-    </content>
     <content url="file://$MODULE_DIR$/../../src">
       <sourceFolder url="file://$MODULE_DIR$/../../src" isTestSource="false" />
     </content>
@@ -103,10 +100,10 @@
     <orderEntry type="library" name="Gradle: de.undercouch:bson4jackson:2.9.2" level="project" />
     <orderEntry type="library" name="Gradle: io.netty:netty-codec:4.1.24.Final" level="project" />
     <orderEntry type="library" name="Gradle: io.netty:netty-transport:4.1.24.Final" level="project" />
-    <orderEntry type="library" name="Gradle: io.netty:netty-buffer:4.1.24.Final" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: commons-io:commons-io:2.6" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.google.guava:guava:27.0-jre" level="project" />
+    <orderEntry type="library" name="Gradle: io.netty:netty-buffer:4.1.24.Final" level="project" />
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.9.8" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.google.guava:guava:27.0-jre" level="project" />
     <orderEntry type="library" name="Gradle: org.hamcrest:hamcrest-core:1.1" level="project" />
     <orderEntry type="library" name="Gradle: org.mongodb:mongodb-driver-reactivestreams:1.11.0" level="project" />
     <orderEntry type="library" name="Gradle: org.reactivestreams:reactive-streams:1.0.2" level="project" />
@@ -115,8 +112,8 @@
     <orderEntry type="library" name="Gradle: org.mongodb:mongodb-driver-async:3.10.0" level="project" />
     <orderEntry type="library" name="Gradle: org.mongodb:mongodb-driver-core:3.10.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: com.google.guava:failureaccess:1.0" level="project" />
-    <orderEntry type="library" name="Gradle: org.mongodb:bson:3.10.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava" level="project" />
+    <orderEntry type="library" name="Gradle: org.mongodb:bson:3.10.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: com.google.code.findbugs:jsr305:3.0.2" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.checkerframework:checker-qual:2.5.2" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: com.google.errorprone:error_prone_annotations:2.2.0" level="project" />
