@@ -1,41 +1,29 @@
-package io.jkratz.katas
+package fr.eline.virtualid
 
-import fr.virtualid.server.module
+import io.ktor.application.*
+import io.ktor.response.*
+import io.ktor.request.*
+import io.ktor.routing.*
 import io.ktor.http.*
+import io.ktor.content.*
+import io.ktor.http.content.*
+import io.ktor.locations.*
+import io.ktor.sessions.*
+import io.ktor.features.*
+import io.ktor.auth.*
+import com.fasterxml.jackson.databind.*
+import io.ktor.jackson.*
 import kotlin.test.*
 import io.ktor.server.testing.*
-import org.litote.kmongo.json
 
 class ApplicationTest {
-
     @Test
-    fun testAddData() {
+    fun testRoot() {
         withTestApplication({ module(testing = true) }) {
-            handleRequest(HttpMethod.Post, "/users/add")
-            {
-                addHeader(HttpHeaders.ContentType, ContentType.Application.Json.toString())
-                setBody(
-                    mapOf(
-                        "userName" to "jerry5",
-                        "password" to "123456",
-                        "email" to "test@gmail.com"
-                    ).json
-                )
-            }.apply {
+            handleRequest(HttpMethod.Get, "/").apply {
                 assertEquals(HttpStatusCode.OK, response.status())
+                assertEquals("HELLO WORLD!", response.content)
             }
         }
     }
-
-
-    @Test
-    fun testList() {
-        withTestApplication({ module(testing = true) }) {
-            handleRequest(HttpMethod.Get, "/users/list").apply {
-                assertEquals(HttpStatusCode.OK, response.status())
-                System.out.println(response.content)
-            }
-        }
-    }
-
 }

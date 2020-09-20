@@ -35,7 +35,7 @@ Virtual iD is a project prototype to create an open-source and encrypted social 
 - Virtual Community pages
 - Free and Premium account system (More cloud storage for premium)
 
-## Installation on Ubuntu 18.04
+## Installation on Ubuntu 20.04
 
 Follow [Offical mongodb instructions](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/) to install mongodb server
 
@@ -44,9 +44,9 @@ Next, start mongodb server :
 
 ```sudo service mongod start```
 
-Install Java 11 :
+Install Java 14 :
 
-```apt install openjdk-11-jdk-headless```
+```apt install openjdk-14-jdk-headless```
 
 Download the latest release :
 
@@ -57,4 +57,10 @@ Now you can run the Virtual iD server :
 ```java -jar virtualid-server-0.1.0.jar```
 
 
+## How to contribute or build from source
 
+Install [IntelliJ Idea](https://www.jetbrains.com/idea/)
+
+Download or clone sources from this repository
+
+Choose "Open or Import" from the IntelliJ Idea welcome pane
