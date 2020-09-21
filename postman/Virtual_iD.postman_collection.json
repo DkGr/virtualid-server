@@ -1,0 +1,261 @@
+{
+	"info": {
+		"_postman_id": "28a2e389-1c7d-4fc7-b427-fee7c183ddd0",
+		"name": "Virtual iD",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "List users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBdXRoZW50aWNhdGlvbiIsImlzcyI6InZpcnR1YWxpZC5mciIsImlkIjoiZTgxYzczZmMtOWY5Yi00MmYzLTlkZjktY2I1NjJkNzYyYjg2IiwiZXhwIjoxNjAwNzE3MzE5fQ.SumJYbVhbOatQlNyI9ID_vzt4FJYIN4hbYd28Nwy4pMflLVuyLpZdq_0v7W_jxST26wqySmB1xTpNVBqryC-WQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8080/users/list",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\":\"testuser\",\n\t\"password\":\"test01\",\n\t\"email\":\"user@test.com\",\n\t\"publicKey\":\"12345\",\n\t\"privateKey\":\"12345\"\n}"
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/users/register",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"testuser\",\n\t\"password\":\"test01\"\n}"
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/users/login",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": \"9edaf6f1-845e-45b9-b8c8-f711e57ed908\",\n\t\"username\":\"testuser\",\n\t\"password\":\"user01\",\n\t\"email\":\"user@test.com\"\n}"
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/users/update",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\":\"testuser\"\n}"
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/users/delete",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Post",
+			"item": [
+				{
+					"name": "List posts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBdXRoZW50aWNhdGlvbiIsImlzcyI6InZpcnR1YWxpZC5mciIsImlkIjoiZTgxYzczZmMtOWY5Yi00MmYzLTlkZjktY2I1NjJkNzYyYjg2IiwiZXhwIjoxNjAwNzE3MzE5fQ.SumJYbVhbOatQlNyI9ID_vzt4FJYIN4hbYd28Nwy4pMflLVuyLpZdq_0v7W_jxST26wqySmB1xTpNVBqryC-WQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8080/posts/list",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"posts",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBdXRoZW50aWNhdGlvbiIsImlzcyI6InZpcnR1YWxpZC5mciIsImlkIjoiZTgxYzczZmMtOWY5Yi00MmYzLTlkZjktY2I1NjJkNzYyYjg2IiwiZXhwIjoxNjAwNzE3MzE5fQ.SumJYbVhbOatQlNyI9ID_vzt4FJYIN4hbYd28Nwy4pMflLVuyLpZdq_0v7W_jxST26wqySmB1xTpNVBqryC-WQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"authorid\": \"9edaf6f1-845e-45b9-b8c8-f711e57ed908\",\n\t\"visibility\":\"friends\",\n\t\"content\":\"Hello World !\",\n\t\"date\":\"2020-09-21T00:00:00Z\"\n}"
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/posts/create",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"posts",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

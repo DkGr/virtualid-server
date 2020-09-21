@@ -38,7 +38,7 @@ fun Application.module(testing: Boolean = false) {
         }
     }*/
 
-    install(Compression) {
+    /*install(Compression) {
         gzip {
             priority = 1.0
         }
@@ -46,11 +46,13 @@ fun Application.module(testing: Boolean = false) {
             priority = 10.0
             minimumSize(1024) // condition
         }
-    }
+    }*/
 
     install(CORS) {
         method(HttpMethod.Options)
         method(HttpMethod.Put)
+        method(HttpMethod.Post)
+        method(HttpMethod.Get)
         method(HttpMethod.Delete)
         method(HttpMethod.Patch)
         header(HttpHeaders.Authorization)
@@ -68,9 +70,9 @@ fun Application.module(testing: Boolean = false) {
         modules(mongoDbModule)
     }
 
-    install(HSTS) {
+    /*install(HSTS) {
         includeSubDomains = true
-    }
+    }*/
 
     // https://ktor.io/servers/features/https-redirect.html#testing
     /*if (!testing) {
