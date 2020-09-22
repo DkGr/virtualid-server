@@ -14,9 +14,11 @@ import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.response.respondText
 import io.ktor.routing.*
+import org.bson.types.ObjectId
 import org.koin.ktor.ext.inject
 import org.litote.kmongo.coroutine.CoroutineClient
 import org.litote.kmongo.eq
+import org.litote.kmongo.id.toId
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.util.*
@@ -41,7 +43,7 @@ fun Route.userRoutes() {
 
             post<UpdateUserRequest>("/update") { request ->
                 val user = User(
-                    id = UUID.fromString(request.id),
+                    _id = ObjectId(request.id).toId(),
                     username = request.username,
                     email = request.email,
                     passwordHash = UserAuth.hashPassword("SHA-512", request.password)

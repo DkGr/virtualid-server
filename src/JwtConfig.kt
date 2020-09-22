@@ -2,7 +2,6 @@ package fr.eline.virtualid
 
 import com.auth0.jwt.*
 import com.auth0.jwt.algorithms.*
-import com.google.gson.GsonBuilder
 import fr.eline.virtualid.bean.User
 import java.util.*
 
@@ -21,11 +20,10 @@ object JwtConfig {
      * Produce a token for this combination of User and Account
      */
     fun makeToken(user: User): String {
-        val gson = GsonBuilder().setPrettyPrinting().create()
         return JWT.create()
             .withSubject("Authentication")
             .withIssuer(issuer)
-            .withClaim("id", user.id.toString())
+            .withClaim("id", user._id.toString())
             .withExpiresAt(getExpiration())
             .sign(algorithm)
     }

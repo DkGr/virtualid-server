@@ -38,7 +38,7 @@ fun Application.module(testing: Boolean = false) {
         }
     }*/
 
-    /*install(Compression) {
+    install(Compression) {
         gzip {
             priority = 1.0
         }
@@ -46,7 +46,7 @@ fun Application.module(testing: Boolean = false) {
             priority = 10.0
             minimumSize(1024) // condition
         }
-    }*/
+    }
 
     install(CORS) {
         method(HttpMethod.Options)
@@ -56,23 +56,21 @@ fun Application.module(testing: Boolean = false) {
         method(HttpMethod.Delete)
         method(HttpMethod.Patch)
         header(HttpHeaders.Authorization)
-        header("MyCustomHeader")
         allowCredentials = true
-        anyHost() // @TODO: Don't do this in production if possible. Try to limit it.
     }
 
     install(DefaultHeaders) {
         header("X-Engine", "Ktor") // will send this header with each response
-        header("X-Environment", "Dev")
+        if(testing) header("X-Environment", "Dev")
     }
 
     install(Koin) {
         modules(mongoDbModule)
     }
 
-    /*install(HSTS) {
+    install(HSTS) {
         includeSubDomains = true
-    }*/
+    }
 
     // https://ktor.io/servers/features/https-redirect.html#testing
     /*if (!testing) {
@@ -88,10 +86,11 @@ fun Application.module(testing: Boolean = false) {
         jwt(name = "virtualid-user-auth") {
             verifier(JwtConfig.verifier)
             realm = "Virtual iD API"
-            validate {
+            validate { credential ->
                 val client : CoroutineClient by inject()
-                val id = it.payload.getClaim("id").asString()
-                Users.findUserById(id, client)
+                val id = credential.payload.getClaim("id").asString()
+                if (Users.findUserById(id, client) != null) JWTPrincipal(credential.payload)
+                else null
             }
         }
     }
@@ -151,5 +150,5 @@ class MyLocation(val name: String, val arg1: Int = 42, val arg2: String = "defau
 data class MySession(val count: Int = 0)
 
 val mongoDbModule = module {
-    single { KMongo.createClient("mongodb://localhost:27017").coroutine }
+    single { KMongo.createClient("mongodb://localhost:27017/?uuidRepresentation=STANDARD").coroutine }
 }
